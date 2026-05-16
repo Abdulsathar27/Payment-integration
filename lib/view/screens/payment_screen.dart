@@ -77,7 +77,26 @@ class PaymentScreen extends StatelessWidget {
                   backgroundColor: AppColors.primary,
                 ),
                 child: provider.paymentStatus == PaymentStatus.loading
-                    ? const CircularProgressIndicator(color: Colors.white)
+                    ? const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colors.white,
+                            ),
+                          ),
+
+                          SizedBox(width: 15),
+
+                          Text(
+                            "Processing...",
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                        ],
+                      )
                     : const Text(
                         "Confirm Payment",
                         style: TextStyle(fontSize: 18, color: Colors.white),
