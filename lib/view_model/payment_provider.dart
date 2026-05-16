@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:paymentin/services/payment_srevice.dart';
 
-
 enum PaymentStatus { idle, loading, success, failed, timeout }
 
 class PaymentProvider extends ChangeNotifier {
@@ -29,7 +28,12 @@ class PaymentProvider extends ChangeNotifier {
   }
 
   Future<void> confirmPayment() async {
-    if (paymentStatus == PaymentStatus.timeout) return;
+    if (paymentStatus == PaymentStatus.timeout ||
+        paymentStatus == PaymentStatus.success ||
+        paymentSrevice == PaymentStatus.loading){
+      return;
+
+        }
 
     paymentStatus = PaymentStatus.loading;
     notifyListeners();
@@ -42,6 +46,13 @@ class PaymentProvider extends ChangeNotifier {
     } else {
       paymentStatus = PaymentStatus.failed;
     }
+    notifyListeners();
+  }
+
+  void retryTransaction() {
+    paymentStatus = PaymentStatus.idle;
+    remainingSeconds = 120;
+    startTimer();
     notifyListeners();
   }
 

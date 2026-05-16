@@ -34,18 +34,39 @@ class PaymentScreen extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            PaymentCard(transaction:transaction),
+            PaymentCard(transaction: transaction),
             const SizedBox(height: 20),
-            TimerWidget(seconds:provider.remainingSeconds),
+            TimerWidget(seconds: provider.remainingSeconds),
             const SizedBox(height: 30),
             StatusCard(status: provider.paymentStatus),
             const Spacer(),
+            if (provider.paymentStatus == PaymentStatus.failed ||
+                provider.paymentStatus == PaymentStatus.timeout)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 55,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      provider.retryTransaction();
+                    },
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(color: Colors.white),
+                    ),
+                    child: const Text(
+                      "Retry Transactions",
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  ),
+                ),
+              ),
             SizedBox(
               width: double.infinity,
               height: 60,
               child: ElevatedButton(
                 onPressed:
-                    provider.paymentSrevice == PaymentStatus.loading ||
+                    provider.paymentStatus == PaymentStatus.loading ||
                         provider.paymentStatus == PaymentStatus.success ||
                         provider.paymentStatus == PaymentStatus.timeout
                     ? null
