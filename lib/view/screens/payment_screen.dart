@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:paymentin/core/constant/app_colors.dart';
 import 'package:paymentin/models/transaction_model.dart';
 import 'package:paymentin/view/widgets/payment_card.dart';
+import 'package:paymentin/view/widgets/status_card.dart';
+import 'package:paymentin/view/widgets/timer_widget.dart';
 import 'package:paymentin/view_model/payment_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -34,9 +36,9 @@ class PaymentScreen extends StatelessWidget {
           children: [
             PaymentCard(transaction:transaction),
             const SizedBox(height: 20),
-            // timerwidget(seconds:provider.remainingSeconds),
+            TimerWidget(seconds:provider.remainingSeconds),
             const SizedBox(height: 30),
-            // statusCards(status: provider.paymentStatus),
+            StatusCard(status: provider.paymentStatus),
             const Spacer(),
             SizedBox(
               width: double.infinity,
