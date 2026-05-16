@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paymentin/view/screens/payment_screen.dart';
 import 'package:paymentin/view_model/payment_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +14,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => PaymentProvider()..startTimer(),
-      child: MaterialApp(debugShowCheckedModeBanner: false),
+      child: MaterialApp(debugShowCheckedModeBanner: false,
+      home: PaymentScreen(),
+      ),
     );
   }
 }
