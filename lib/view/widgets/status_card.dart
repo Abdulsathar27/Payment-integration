@@ -32,7 +32,8 @@ class StatusCard extends StatelessWidget {
       color = AppColors.primary;
       icon = Icons.sync;
     }
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 400),
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
